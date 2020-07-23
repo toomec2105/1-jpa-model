@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.tomek.user.UserService;
+
 @SpringBootTest
 class UserServiceTest {
 	
@@ -13,7 +15,7 @@ class UserServiceTest {
 
 	@Test
 	void test() {
-		assertEquals(1, userService.getUsers().size());
+		assertEquals(3, userService.getUsers().size());
 	}
 
 }

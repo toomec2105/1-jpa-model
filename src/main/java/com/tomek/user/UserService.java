@@ -1,4 +1,4 @@
-package com.tomek;
+package com.tomek.user;
 
 import java.util.List;
 
