@@ -14,8 +14,8 @@ class UserServiceTest {
 	private UserService userService;
 
 	@Test
-	void test() {
-		assertEquals(6, userService.getUsers().size());
+	void whenDataLoadedFromFileAndCLRunner_returnsNoOfUsersCorrectly() {
+		assertEquals(7, userService.getUsers().size());
 	}
 
 }
