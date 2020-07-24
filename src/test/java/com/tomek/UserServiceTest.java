@@ -15,7 +15,7 @@ class UserServiceTest {
 
 	@Test
 	void test() {
-		assertEquals(3, userService.getUsers().size());
+		assertEquals(6, userService.getUsers().size());
 	}
 
 }

@@ -10,7 +10,7 @@ public class UserService{
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<Springuser> getUsers(){
+	public List<User> getUsers(){
 		return userRepository.findAll();
 	}
 	
