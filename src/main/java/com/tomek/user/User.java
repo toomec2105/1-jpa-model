@@ -10,7 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor
 @Table(name = "users")
 @Entity
 public class User {
@@ -22,12 +24,20 @@ public class User {
 	private String role;
 	private String username;
 	
+	public User() {		
+	}
+	
 	public User(String email, String password, String role, String username) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.role = role;
 		this.username = username;
+	}
+
+	public String getName() {
+		
+		return username;
 	}
 	
 }

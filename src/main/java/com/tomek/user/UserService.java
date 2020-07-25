@@ -6,12 +6,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService{
+public class UserService {
 	@Autowired
 	private UserRepository userRepository;
-	
-	public List<User> getUsers(){
+
+	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
-	
+
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
+	public List<User> findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	public User findByEmailAndPassword(String email, String password) {
+		return userRepository.findByEmailAndPassword(email, password);
+	}
+
+	public List<User> findByUsernameContaining(String searchValue) {
+		return userRepository.findByUsernameContaining(searchValue);
+	}
+
+	public List<User> findByUsernameBetween(String start, String end) {
+		return userRepository.findByUsernameBetween(start, end);
+	}
+
+	public List<User> findByRoleNot(String role) {
+
+		return userRepository.findByRoleNot(role);
+	}
+
 }

@@ -1,13 +1,13 @@
-package com.tomek.user;
+package com.tomek;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import com.tomek.Application;
+import com.tomek.user.User;
+import com.tomek.user.UserRepository;
 @Component
 public class DataLoader implements CommandLineRunner {
 	
