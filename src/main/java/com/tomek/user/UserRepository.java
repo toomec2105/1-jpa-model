@@ -23,12 +23,24 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	// -------------------------Spring-Data native sql-----------------------------
 
 	@Query(value = "SELECT  COUNT(DISTINCT role) FROM users;", nativeQuery = true)
-	int getDisctinctNumberOfUserRolesNative();
+	int getDisctinctNumberOfUserRolesNATIVE();
 
 	@Query(value = "SELECT * FROM users WHERE EMAIL = ?1", nativeQuery = true)
-	User findByEmailAddress(String email);
+	User findByEmailAddressNATIVE(String email);
 
 	// With parameters don't use semicolon at the end of the query!!!
 	@Query(value = "SELECT * FROM users WHERE password LIKE %?1%", nativeQuery = true)
-	List<User> findByPassword(String expression);
+	List<User> findByPasswordNATIVE(String expression);
+
+	// -----------------------Spring-Data jpql queries----------------------------
+
+	// in JPQL you have to use the Java name of the entity class; 
+	// or @Entity(name ="users")
+	@Query(value = "SELECT u from User u WHERE u.email = ?1 AND u.username = ?2")
+	User getithEmailAndNameJPQL(String email, String username);
+
+	
+	@Query(value = "SELECT u from User u WHERE u.email LIKE %?1")
+	List<User> getUsersWithMatcingEmailJPQL(String expression);
+
 }

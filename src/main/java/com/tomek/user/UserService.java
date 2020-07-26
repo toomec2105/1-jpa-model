@@ -39,17 +39,27 @@ public class UserService {
 		return userRepository.findByRoleNot(role);
 	}
 
-	public int getDisctinctNumberOfUserRolesNative() {
+	public int getDisctinctNumberOfUserRolesNativeNATIVE() {
 
-		return userRepository.getDisctinctNumberOfUserRolesNative();
+		return userRepository.getDisctinctNumberOfUserRolesNATIVE();
 	}
 
-	public User findByEmailAddress(String email) {
-		return userRepository.findByEmailAddress(email);
+	public User findByEmailAddressNATIVE(String email) {
+		return userRepository.findByEmailAddressNATIVE(email);
 	}
 
-	public List<User> getUsersWitchMatchingPassword(String expression) {
+	public List<User> getUsersWitchMatchingPasswordNATIVE(String expression) {
 
-		return userRepository.findByPassword(expression);
+		return userRepository.findByPasswordNATIVE(expression);
+	}
+
+	public User getithEmailAndNameJPQL(String email, String username) {
+		
+		return userRepository.getithEmailAndNameJPQL(email, username);
+	}
+
+	public List<User> getUsersWithMatcingEmailJPQL(String expression) {
+
+		return userRepository.getUsersWithMatcingEmailJPQL(expression);
 	}
 }

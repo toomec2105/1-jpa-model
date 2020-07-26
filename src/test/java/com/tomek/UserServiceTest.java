@@ -70,27 +70,47 @@ class UserServiceTest {
 																				// @
 	}
 
-	// --------------------------------Spring-Data native
-	// sql---------------------------------------------------
+	// -----------------------Spring-Data native sql-----------------
 
 	@Test
 	void givenUsersWithRoles_returnsNoOfRoles() {
-		assertEquals(2, userService.getDisctinctNumberOfUserRolesNative());
+		assertEquals(2, userService.getDisctinctNumberOfUserRolesNativeNATIVE());
 	}
 
 	@Test
 	void givenEmail_findsUserWithMatchingEmail() {
 		String email = "caren@onet.pl";
-		User user = userService.findByEmailAddress(email);
+		User user = userService.findByEmailAddressNATIVE(email);
 
 		assertEquals(6, user.getId());
 	}
-
+	
 	@Test
 	void givenExpression_findsUsersWithMatchingPassword() {
 		String expression = "3";
-		List<User> users = userService.getUsersWitchMatchingPassword(expression);
+		List<User> users = userService.getUsersWitchMatchingPasswordNATIVE(expression);
 
 		assertEquals(3, users.size());
 	}
+	// -----------------------Spring-Data jpql queries----------------------------
+	@Test
+	void givenUsernameAndEmail_findsMatchingUser() {
+		String email = "alice.white@gmail.com";
+		String username = "Alice White";
+		
+		User user = userService.getithEmailAndNameJPQL(email, username);
+
+		assertEquals(2, user.getId());
+	}
+	
+	@Test
+	void givenExpression_findsUsersWithMatchingEmails() {
+		String expression =  "onet.pl";
+		
+		
+		List<User> users = userService.getUsersWithMatcingEmailJPQL(expression);
+
+		assertEquals(2, users.size());
+	}
+	
 }
