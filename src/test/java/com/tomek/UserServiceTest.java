@@ -1,6 +1,9 @@
 package com.tomek;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,14 +34,28 @@ class UserServiceTest {
 	}
 
 	@Test
-	void findsUserByEmailAndPasswordCorrectly() {
-		User user = userService.findByEmailAndPassword("johnson@zoho.com", "john123");
+	void givenEmailAndPassword_findsUser() {
+		// arrange given
+		String password = "john123";
+		String email = "johnson@zoho.com";
+
+		// act when
+		User user = userService.findByEmailAndPassword(email, password);
+
+		// assert then
 		assertEquals("Ben Johnson", user.getUsername());
 	}
 
 	@Test
-	void findsUsersContainingValueCorrectly() {
-		assertEquals(3, userService.findByUsernameContaining("en").size());
+	void givenExpression_findsUsersWithMatchingUsername() {
+		// given
+		String expression = "en";
+
+		// when
+		List<User> users = userService.findByUsernameContaining(expression);
+
+		// then
+		assertEquals(3, users.size());
 	}
 
 	@Test
@@ -53,4 +70,27 @@ class UserServiceTest {
 																				// @
 	}
 
+	// --------------------------------Spring-Data native
+	// sql---------------------------------------------------
+
+	@Test
+	void givenUsersWithRoles_returnsNoOfRoles() {
+		assertEquals(2, userService.getDisctinctNumberOfUserRolesNative());
+	}
+
+	@Test
+	void givenEmail_findsUserWithMatchingEmail() {
+		String email = "caren@onet.pl";
+		User user = userService.findByEmailAddress(email);
+
+		assertEquals(6, user.getId());
+	}
+
+	@Test
+	void givenExpression_findsUsersWithMatchingPassword() {
+		String expression = "3";
+		List<User> users = userService.getUsersWitchMatchingPassword(expression);
+
+		assertEquals(3, users.size());
+	}
 }

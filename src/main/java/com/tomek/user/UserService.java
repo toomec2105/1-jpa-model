@@ -39,4 +39,17 @@ public class UserService {
 		return userRepository.findByRoleNot(role);
 	}
 
+	public int getDisctinctNumberOfUserRolesNative() {
+
+		return userRepository.getDisctinctNumberOfUserRolesNative();
+	}
+
+	public User findByEmailAddress(String email) {
+		return userRepository.findByEmailAddress(email);
+	}
+
+	public List<User> getUsersWitchMatchingPassword(String expression) {
+
+		return userRepository.findByPassword(expression);
+	}
 }
