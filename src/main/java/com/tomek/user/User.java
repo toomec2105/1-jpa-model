@@ -24,9 +24,6 @@ public class User {
 	private String role;
 	private String username;
 	
-	public User() {		
-	}
-	
 	public User(String email, String password, String role, String username) {
 		super();
 		this.email = email;
@@ -35,9 +32,5 @@ public class User {
 		this.username = username;
 	}
 
-	public String getName() {
-		
-		return username;
-	}
 	
 }

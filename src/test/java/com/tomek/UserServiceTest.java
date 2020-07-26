@@ -22,7 +22,7 @@ class UserServiceTest {
 	@Test
 	void findsUserByEmailCorrectly() {
 		User user = userService.findByEmail("jennifer@onet.pl");
-		assertEquals("Jennifer Smith", user.getName());
+		assertEquals("Jennifer Smith", user.getUsername());
 	}
 
 	@Test
@@ -33,7 +33,7 @@ class UserServiceTest {
 	@Test
 	void findsUserByEmailAndPasswordCorrectly() {
 		User user = userService.findByEmailAndPassword("johnson@zoho.com", "john123");
-		assertEquals("Ben Johnson", user.getName());
+		assertEquals("Ben Johnson", user.getUsername());
 	}
 
 	@Test
