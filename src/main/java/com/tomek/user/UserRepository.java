@@ -22,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> findByRoleNot(String role);
 	// -------------------------Spring-Data native sql-----------------------------
 
-	@Query(value = "SELECT  COUNT(DISTINCT role) FROM users;", nativeQuery = true)
+	@Query(value = "SELECT COUNT(DISTINCT role) FROM users;", nativeQuery = true)
 	int getDisctinctNumberOfUserRolesNATIVE();
 
 	@Query(value = "SELECT * FROM users WHERE EMAIL = ?1", nativeQuery = true)

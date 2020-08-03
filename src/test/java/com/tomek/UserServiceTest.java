@@ -82,7 +82,7 @@ class UserServiceTest {
 		String email = "caren@onet.pl";
 		User user = userService.findByEmailAddressNATIVE(email);
 
-		assertEquals(6, user.getId());
+		assertEquals(email, user.getEmail());
 	}
 	
 	@Test
