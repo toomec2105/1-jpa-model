@@ -40,7 +40,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User getithEmailAndNameJPQL(String email, String username);
 
 	
-	@Query(value = "SELECT u from User u WHERE u.email LIKE %?1")
-	List<User> getUsersWithMatcingEmailJPQL(String expression);
+	@Query(value = "SELECT u from User u WHERE u.email LIKE %?1%")
+	List<User> getUsersWithMatchingEmailJPQL(String expression);
 
 }

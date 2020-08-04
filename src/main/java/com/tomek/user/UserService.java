@@ -69,6 +69,6 @@ public class UserService {
 
 	public List<User> getUsersWithMatcingEmailJPQL(String expression) {
 
-		return userRepository.getUsersWithMatcingEmailJPQL(expression);
+		return userRepository.getUsersWithMatchingEmailJPQL(expression);
 	}
 }
