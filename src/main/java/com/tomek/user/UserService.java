@@ -7,9 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-	@Autowired
+	/*
+	 * @Autowired private UserRepository userRepository;
+	 */
+
 	private UserRepository userRepository;
-	
+
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
 	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
@@ -20,10 +27,10 @@ public class UserService {
 
 	public User findByEmail(String email) {
 		User found = userRepository.findByEmail(email);
-		
+
 		// do stuff with found
-	    // ...
-	
+		// ...
+
 		return found;
 	}
 
@@ -36,7 +43,11 @@ public class UserService {
 	}
 
 	public List<User> findByUsernameContaining(String searchValue) {
-		return userRepository.findByUsernameContaining(searchValue);
+		List<User> users = userRepository.findByUsernameContaining(searchValue);
+
+		// do stuff
+
+		return users;
 	}
 
 	public List<User> findByUsernameBetween(String start, String end) {
@@ -63,7 +74,7 @@ public class UserService {
 	}
 
 	public User getithEmailAndNameJPQL(String email, String username) {
-		
+
 		return userRepository.getithEmailAndNameJPQL(email, username);
 	}
 

@@ -1,15 +1,10 @@
 package com.tomek.user;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -37,9 +32,7 @@ public class UserRepositoryTest {
 	@Test
 	void testMappings() {
 		User user = new User("jeszcze@interia.pl", "polandia43", "ADMIN", "Czerwony6");
-		testEntityManager.persist(user);
-
-		User found = userRepository.findByEmail("jeszcze@interia.pl");
+		User found = testEntityManager.persistFlushFind(user);
 		/*
 		 * assertEquals(user.getId(), found.getId()); assertEquals(user.getEmail(),
 		 * found.getEmail()); assertEquals(user.getPassword(), found.getPassword());

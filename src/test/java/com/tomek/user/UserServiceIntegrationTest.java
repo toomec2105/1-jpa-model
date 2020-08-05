@@ -1,4 +1,4 @@
-package com.tomek;
+package com.tomek.user;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +12,7 @@ import com.tomek.user.User;
 import com.tomek.user.UserService;
 
 @SpringBootTest
-class UserServiceTest {
+class UserServiceIntegrationTest {
 
 	@Autowired
 	private UserService userService;
