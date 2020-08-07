@@ -1,6 +1,7 @@
 package com.tomek.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByEmail(String email);
 
 	List<User> findByUsername(String username);
-
+	
 	User findByEmailAndPassword(String email, String password);
 
 	List<User> findByUsernameContaining(String searchValue);
@@ -21,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	List<User> findByRoleNot(String role);
 	// -------------------------Spring-Data native sql-----------------------------
-
+	
 	@Query(value = "SELECT COUNT(DISTINCT role) FROM users;", nativeQuery = true)
 	int getDisctinctNumberOfUserRolesNATIVE();
 

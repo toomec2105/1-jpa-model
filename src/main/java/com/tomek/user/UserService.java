@@ -16,11 +16,12 @@ public class UserService {
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-
+	
 	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
-
+	
+	
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
@@ -81,5 +82,9 @@ public class UserService {
 	public List<User> getUsersWithMatcingEmailJPQL(String expression) {
 
 		return userRepository.getUsersWithMatchingEmailJPQL(expression);
+	}
+
+	public User findById(Long id) {
+		return userRepository.getOne(id);
 	}
 }

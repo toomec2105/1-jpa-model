@@ -1,21 +1,45 @@
 package com.tomek.user;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.tomek.user.User;
-import com.tomek.user.UserService;
 
 @SpringBootTest
 class UserServiceIntegrationTest {
 
 	@Autowired
 	private UserService userService;
+
+	private User user = new User("johnson@zoho.com", "john123", "ADMIN", "johnny3");
+	private User saved = null;
+
+	@BeforeEach
+	public void beforeEach() {
+
+		saved = userService.saveUser(user);
+
+		assumeTrue("johnson@zoho.com".equals(saved.getEmail()));
+		assumeTrue(saved.getId() != null);
+	}
+
+	@Test
+	void givenId_findsUser() {
+
+		// act when
+		User found = userService.findById(saved.getId());
+
+		// assert then
+		assertNotNull(found.getId());
+		assertEquals(saved.getId(), found.getId());
+		assertEquals(saved.getEmail(), found.getEmail());
+	}
 
 	@Test
 	void whenDataLoadedFromFileAndCLRunner_returnsNoOfUsersCorrectly() {
@@ -47,6 +71,24 @@ class UserServiceIntegrationTest {
 	}
 
 	@Test
+	void givenUser_addsUser() {
+		// arrange given
+		User user = new User("johnson@zoho.com", "john123", "ADMIN", "johnny3");
+
+		// act when
+		User saved = userService.saveUser(user);
+
+		// assert then
+		assertEquals("johnson@zoho.com", saved.getEmail());
+		assertNotNull(saved.getId());
+	}
+
+	@Test
+	void givenId_updatesUser() {
+		assertEquals(1, 1);
+	}
+
+	@Test
 	void givenExpression_findsUsersWithMatchingUsername() {
 		// given
 		String expression = "en";
@@ -56,6 +98,11 @@ class UserServiceIntegrationTest {
 
 		// then
 		assertEquals(3, users.size());
+	}
+
+	@Test
+	void givenId_removesCorrectUser() {
+		assertEquals(1, 1);
 	}
 
 	@Test
@@ -84,7 +131,7 @@ class UserServiceIntegrationTest {
 
 		assertEquals(email, user.getEmail());
 	}
-	
+
 	@Test
 	void givenExpression_findsUsersWithMatchingPassword() {
 		String expression = "3";
@@ -92,25 +139,25 @@ class UserServiceIntegrationTest {
 
 		assertEquals(3, users.size());
 	}
+
 	// -----------------------Spring-Data jpql queries----------------------------
 	@Test
 	void givenUsernameAndEmail_findsMatchingUser() {
 		String email = "alice.white@gmail.com";
 		String username = "Alice White";
-		
+
 		User user = userService.getithEmailAndNameJPQL(email, username);
 
 		assertEquals(2, user.getId());
 	}
-	
+
 	@Test
 	void givenExpression_findsUsersWithMatchingEmails() {
-		String expression =  "onet.pl";
-		
-		
+		String expression = "onet.pl";
+
 		List<User> users = userService.getUsersWithMatcingEmailJPQL(expression);
 
 		assertEquals(2, users.size());
 	}
-	
+
 }
