@@ -1,8 +1,8 @@
 package com.tomek.user;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,16 +16,37 @@ public class UserService {
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	
+
+	// -------- BASIC CRUD ---------
 	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
-	
-	
-	public List<User> getUsers() {
+
+	public User findById(Long id) {
+		Optional<User> optUser = userRepository.findById(id);
+
+		return optUser.orElseThrow(() -> new UserNotFoundException());
+	}
+
+	public List<User> findUsers() {
 		return userRepository.findAll();
 	}
 
+	public User updateUser(User user) {
+		return userRepository.save(user);
+	}
+
+	public void deleteById(Long id) {
+		userRepository.deleteById(id);
+	}
+	
+	public void deleteAllUsers() {
+		userRepository.deleteAllInBatch();
+	}
+
+	// --------- OTHER METHODS ----------
+	
+	
 	public User findByEmail(String email) {
 		User found = userRepository.findByEmail(email);
 
@@ -60,7 +81,7 @@ public class UserService {
 		return userRepository.findByRoleNot(role);
 	}
 
-	public int getDisctinctNumberOfUserRolesNativeNATIVE() {
+	public int findDisctinctNumberOfUserRolesNativeNATIVE() {
 
 		return userRepository.getDisctinctNumberOfUserRolesNATIVE();
 	}
@@ -69,22 +90,19 @@ public class UserService {
 		return userRepository.findByEmailAddressNATIVE(email);
 	}
 
-	public List<User> getUsersWitchMatchingPasswordNATIVE(String expression) {
+	public List<User> findUsersWitchMatchingPasswordNATIVE(String expression) {
 
 		return userRepository.findByPasswordNATIVE(expression);
 	}
 
-	public User getithEmailAndNameJPQL(String email, String username) {
+	public User findByEmailAndNameJPQL(String email, String username) {
 
-		return userRepository.getithEmailAndNameJPQL(email, username);
+		return userRepository.getByEmailAndNameJPQL(email, username);
 	}
 
-	public List<User> getUsersWithMatcingEmailJPQL(String expression) {
+	public List<User> findUsersWithMatcingEmailJPQL(String expression) {
 
 		return userRepository.getUsersWithMatchingEmailJPQL(expression);
 	}
 
-	public User findById(Long id) {
-		return userRepository.getOne(id);
-	}
 }

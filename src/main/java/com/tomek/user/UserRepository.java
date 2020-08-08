@@ -1,7 +1,6 @@
 package com.tomek.user;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,7 +37,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	// in JPQL you have to use the Java name of the entity class; 
 	// or @Entity(name ="users")
 	@Query(value = "SELECT u from User u WHERE u.email = ?1 AND u.username = ?2")
-	User getithEmailAndNameJPQL(String email, String username);
+	User getByEmailAndNameJPQL(String email, String username);
 
 	
 	@Query(value = "SELECT u from User u WHERE u.email LIKE %?1%")
