@@ -42,11 +42,10 @@ class UserServiceIntegrationTest {
 		// act
 		User saved = userService.saveUser(user);
 
-		assumeTrue("johnson@zoho.com".equals(saved.getEmail()));
 		assumeTrue(saved.getId() != null);
+		assumeTrue("johnson@zoho.com".equals(saved.getEmail()));
 	}
 
-	// to prevetn lazy initialization exception
 	@Test
 	void givenId_findsUser() {
 		User user = new User("johnson@zoho.com", "john123", "ADMIN", "johnny3");
@@ -91,7 +90,6 @@ class UserServiceIntegrationTest {
 
 		assertEquals("newEmail@onet.pl", updated.getEmail());
 
-		// Long updatedId = updated.getId();
 		User userBeforeUpdate = userService.findById(saved.getId());
 
 		assertEquals(userBeforeUpdate.getEmail(), updated.getEmail());
